@@ -1,0 +1,51 @@
+{
+  "name": "tapback",
+  "version": "0.1.0",
+  "description": "A little tap. A lot of personality. A local-first sound toy for macOS and Windows.",
+  "author": "TapBack contributors",
+  "license": "MIT",
+  "private": true,
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "tsc --noEmit && vite build && node scripts/build-native.mjs",
+    "start": "electron .",
+    "test": "node --test tests/*.test.mjs",
+    "test:app": "node scripts/smoke.mjs",
+    "package:mac": "pnpm build && electron-builder --mac dir --universal && node scripts/archive-mac.mjs",
+    "package:win": "pnpm build && electron-builder --win zip --x64"
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "electron": "44.4.5",
+    "electron-builder": "26.15.3",
+    "playwright": "^1.58.0",
+    "typescript": "^5.9.3",
+    "vite": "8.3.1"
+  },
+  "build": {
+    "appId": "fun.tapback.desktop",
+    "productName": "TapBack",
+    "directories": { "output": "release" },
+    "files": ["dist/**/*", "electron/**/*", "shared/**/*", "package.json"],
+    "extraResources": [{ "from": "native", "to": "native", "filter": ["tapback-sensor", "windows-sensor.ps1"] }],
+    "mac": {
+      "category": "public.app-category.entertainment",
+      "icon": "public/icon.icns",
+      "identity": null,
+      "hardenedRuntime": false,
+      "entitlements": "native/entitlements.mac.plist",
+      "entitlementsInherit": "native/entitlements.mac.plist",
+      "extendInfo": { "NSMicrophoneUsageDescription": "TapBack uses the microphone only when you start tap detection or record a custom sound. Audio stays on your computer." },
+      "target": ["zip"]
+    },
+    "win": { "icon": "public/icon.ico", "target": ["zip"], "signExecutable": false },
+    "artifactName": "TapBack-${version}-${os}-${arch}.${ext}"
+  }
+}

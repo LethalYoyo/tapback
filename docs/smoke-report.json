@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "packaged": true,
+  "checks": [
+    "window load",
+    "manual reaction",
+    "pack selection",
+    "sound preview",
+    "audio import",
+    "trimmed WAV save",
+    "include/exclude",
+    "non-silent microphone recording with fake device",
+    "recording save",
+    "pack export and import through IPC",
+    "mic detection start/pause",
+    "hidden-window audio processing",
+    "calibration",
+    "native capability response",
+    "mute",
+    "settings persisted to disk"
+  ],
+  "sensor": {
+    "type": "ready",
+    "message": "MacBook motion sensor connected",
+    "samples": 138,
+    "last": {
+      "type": "sample",
+      "x": -0.399048,
+      "y": 0.157303,
+      "z": -0.902344
+    }
+  },
+  "recordingPeak": 32731,
+  "rendererErrors": []
+}
